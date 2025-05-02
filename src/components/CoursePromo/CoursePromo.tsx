@@ -12,7 +12,7 @@ const courseDetails = {
   'network-cabling': { name: 'Network Cabling', code: 'DTIL 101', color: '#009688' },
   'cctv-surveillance': { name: 'CCTV Surveillance', code: 'DTIL 201', color: '#d32f2f' },
   'electronics-relays': { name: 'Electronics & Relays', code: 'DTIL 401', color: '#FF9800' },
-  'access-control': { name: 'Access Control', code: 'DTIL 301', color: '#4CAF50' },
+  'access-control': { name: 'Access Control', code: 'DTIL 402', color: '#4CAF50' },
 };
 
 const CoursePromo: React.FC<CoursePromoProps> = ({ courseType, onBackToMenu }) => {
@@ -71,10 +71,10 @@ ${commonFooter}
 
 💻 𝗟𝗲𝗮𝗿𝗻 𝗠𝗼𝗿𝗲: www.delmitraining.com
 
-#DelmiTrainingInstitute #ElectronicsTrainingInToronto #ElectronicSecurity #AccessControlTraining #ElectronicsCareers #TechTraining #RelaySystems #HandsOnLearning #networkcabling #delmitraininginstitute #accesscontrol`;
+#DTIL401 #ElectronicsRelays #ElectronicsTrainingInToronto #ElectronicSecurity #AccessControlTraining #ElectronicsCareers #TechTraining #RelaySystems #HandsOnLearning #networkcabling #delmitraininginstitute #accesscontrol`;
         break;
       case 'access-control':
-        template = `🚨 𝗗𝗧𝗜𝗟 𝟬𝟬𝟭: 𝗔𝗰𝗰𝗲𝘀𝘀 𝗖𝗼𝗻𝘁𝗿𝗼𝗹 𝗦𝘆𝘀𝘁𝗲𝗺𝘀 𝗧𝗲𝗰𝗵𝗻𝗶𝗰𝗶𝗮𝗻 𝗖𝗼𝘂𝗿𝘀𝗲 at 𝗗𝗲𝗹𝗺𝗶 𝗧𝗿𝗮𝗶𝗻𝗶𝗻𝗴 𝗜𝗻𝘀𝘁𝗶𝘁𝘂𝘁𝗲! 🚨
+        template = `🚨 𝗗𝗧𝗜𝗟 𝟰𝟬𝟮: 𝗔𝗰𝗰𝗲𝘀𝘀 𝗖𝗼𝗻𝘁𝗿𝗼𝗹 𝗦𝘆𝘀𝘁𝗲𝗺𝘀 𝗧𝗲𝗰𝗵𝗻𝗶𝗰𝗶𝗮𝗻 𝗖𝗼𝘂𝗿𝘀𝗲 at 𝗗𝗲𝗹𝗺𝗶 𝗧𝗿𝗮𝗶𝗻𝗶𝗻𝗴 𝗜𝗻𝘀𝘁𝗶𝘁𝘂𝘁𝗲! 🚨
 
 🔐 𝙎𝙚𝙘𝙪𝙧𝙚 𝙔𝙤𝙪𝙧 𝙁𝙪𝙩𝙪𝙧𝙚 𝙞𝙣 𝘼𝙙𝙫𝙖𝙣𝙘𝙚𝙙 𝙎𝙚𝙘𝙪𝙧𝙞𝙩𝙮! 🔐
 Become proficient in designing, installing, and managing cutting-edge 𝗮𝗰𝗰𝗲𝘀𝘀 𝗰𝗼𝗻𝘁𝗿𝗼𝗹 𝘀𝘆𝘀𝘁𝗲𝗺𝘀. From card readers to biometrics, gain the expertise needed in the high-demand physical security industry.
