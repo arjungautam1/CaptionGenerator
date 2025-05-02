@@ -89,7 +89,7 @@ ${commonFooter}
 
 🔑 Unlock a rewarding career path with Delmi Training Institute!
 
-#DTIL301 #AccessControl #PhysicalSecurity #SecuritySystems #SmartSecurity #Biometrics #DelmiTraining #SecurityTechnician #HandsOnTraining #JobReady #CanadianSecurity`;
+#DTIL402 #AccessControl #PhysicalSecurity #SecuritySystems #SmartSecurity #Biometrics #DelmiTraining #SecurityTechnician #HandsOnTraining #JobReady #CanadianSecurity`;
         break;
       default:
         template = 'Error: Invalid course type.';
@@ -216,7 +216,14 @@ ${commonFooter}
           justifyContent: 'space-between', 
           width: '100%',
           maxWidth: '800px',
-          marginBottom: '15px' 
+          marginBottom: '15px',
+          position: isMobile ? 'sticky' : 'relative',
+          top: isMobile ? '0' : 'auto',
+          zIndex: 10,
+          padding: isMobile ? '10px' : '0',
+          backgroundColor: isMobile ? 'rgba(40, 44, 52, 0.95)' : 'transparent',
+          backdropFilter: isMobile ? 'blur(10px)' : 'none',
+          borderBottom: isMobile ? '1px solid rgba(255, 255, 255, 0.1)' : 'none',
         }}>
           <div style={{ display: 'flex', gap: '10px' }}>
             <button 
@@ -282,28 +289,42 @@ ${commonFooter}
           </div>
         </div>
         
-        <h1 style={{ marginBottom: '10px' }}>{selectedCourse.name} Promotion Generator</h1>
+        <h1 style={{ 
+          marginBottom: '10px',
+          fontSize: isSmallMobile ? '1.5rem' : isMobile ? '1.8rem' : '2rem'
+        }}>
+          {selectedCourse.name} Promotion Generator
+        </h1>
         <p style={{ 
           margin: '0 0 25px 0', 
           opacity: 0.8, 
-          fontSize: '1rem',
-          maxWidth: '600px' 
+          fontSize: isMobile ? '0.9rem' : '1rem',
+          maxWidth: '600px',
+          padding: '0 15px'
         }}>
           Generate a promotional caption for the {selectedCourse.name} course ({selectedCourse.code}).
         </p>
         
         {/* Content Categories at Top - OUTSIDE the card */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', marginBottom: '22px', marginTop: '10px' }}>
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'center', 
+          gap: isSmallMobile ? '8px' : '12px', 
+          marginBottom: '22px', 
+          marginTop: '10px',
+          flexWrap: 'wrap',
+          padding: '0 10px'
+        }}>
           {Object.entries(courseDetails).map(([key, detail]) => (
             <div
               key={key}
               style={{
-                padding: '8px 18px',
+                padding: isSmallMobile ? '6px 10px' : isMobile ? '7px 15px' : '8px 18px',
                 borderRadius: '8px',
                 background: key === courseType ? themeColor : 'rgba(255,255,255,0.08)',
                 color: key === courseType ? '#fff' : '#cfd8dc',
                 fontWeight: key === courseType ? 700 : 500,
-                fontSize: isMobile ? '0.98rem' : '1.08rem',
+                fontSize: isSmallMobile ? '0.85rem' : isMobile ? '0.95rem' : '1.08rem',
                 border: key === courseType ? `2px solid ${themeColor}` : '1px solid rgba(255,255,255,0.15)',
                 boxShadow: key === courseType ? '0 2px 8px rgba(0,0,0,0.10)' : 'none',
                 cursor: 'default',
@@ -331,20 +352,35 @@ ${commonFooter}
           {/* Generated caption card */}
           {captionTemplate && (
             <div style={{ position: 'relative', marginBottom: '20px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px', flexWrap: 'wrap', gap: '8px' }}>
+              <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center', 
+                marginBottom: '10px', 
+                flexWrap: 'wrap', 
+                gap: '8px' 
+              }}>
                 {/* Social Media Platforms next to copy button */}
-                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                <div style={{ 
+                  display: 'flex', 
+                  gap: isSmallMobile ? '5px' : '8px',
+                  flexWrap: 'wrap',
+                  maxWidth: '100%',
+                  overflow: 'auto',
+                  padding: isSmallMobile ? '5px 0' : '0',
+                  margin: isSmallMobile ? '0 -5px' : '0'
+                }}>
                   {['instagram','facebook','twitter','linkedin','tiktok'].map((plat) => (
                     <button
                       key={plat}
                       onClick={() => setPlatform(plat)}
                       style={{
-                        padding: '7px 12px',
+                        padding: isSmallMobile ? '6px 8px' : isMobile ? '6px 10px' : '7px 12px',
                         borderRadius: '6px',
                         background: platform === plat ? themeColor : 'rgba(255,255,255,0.10)',
                         color: platform === plat ? '#fff' : '#cfd8dc',
                         fontWeight: platform === plat ? 600 : 500,
-                        fontSize: '0.9rem',
+                        fontSize: isSmallMobile ? '0.8rem' : '0.9rem',
                         border: platform === plat ? `2px solid ${themeColor}` : '1px solid rgba(255,255,255,0.15)',
                         boxShadow: platform === plat ? '0 2px 8px rgba(0,0,0,0.10)' : 'none',
                         cursor: 'pointer',
@@ -353,10 +389,11 @@ ${commonFooter}
                         display: 'flex',
                         alignItems: 'center',
                         gap: '5px',
+                        whiteSpace: 'nowrap',
                       }}
                     >
                       <span>{getPlatformIcon(plat)}</span>
-                      <span>{plat === 'twitter' ? 'Twitter/X' : plat.charAt(0).toUpperCase() + plat.slice(1)}</span>
+                      <span>{plat === 'twitter' ? (isSmallMobile ? 'X' : 'Twitter/X') : (isSmallMobile ? plat.charAt(0).toUpperCase() : plat.charAt(0).toUpperCase() + plat.slice(1))}</span>
                     </button>
                   ))}
                 </div>
@@ -364,7 +401,7 @@ ${commonFooter}
                 <button
                   onClick={handleCopyToClipboard}
                   style={{
-                    padding: '10px 16px',
+                    padding: isSmallMobile ? '8px 12px' : '10px 16px',
                     background: themeColor,
                     color: 'white',
                     border: 'none',
@@ -378,6 +415,7 @@ ${commonFooter}
                     width: isSmallMobile ? '100%' : 'auto',
                     fontSize: isMobile ? '0.95rem' : '1rem',
                     boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+                    marginTop: isSmallMobile ? '5px' : '0',
                   }}
                   onMouseOver={(e) => {
                     e.currentTarget.style.transform = 'translateY(-2px)';
@@ -391,55 +429,42 @@ ${commonFooter}
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
                   </svg>
-                  Copy for {platform.charAt(0).toUpperCase() + platform.slice(1).replace('twitter', 'Twitter/X')}
+                  {isSmallMobile ? 'Copy' : `Copy for ${platform.charAt(0).toUpperCase() + platform.slice(1).replace('twitter', 'Twitter/X')}`}
                 </button>
               </div>
               <div
                 dangerouslySetInnerHTML={{ __html: getFormattedCaption().replace(/\n\n/g, '<br/><br/>').replace(/\n/g, '<br/>') }}
-                style={{ textAlign: 'left', background: 'linear-gradient(to bottom right, #ffffff, #f8f9fa)', color: '#222', borderRadius: '12px', border: '1px solid #e0e0e0', boxShadow: '0 12px 28px rgba(0,0,0,0.12)', padding: isMobile ? '20px 15px' : '28px 32px', fontSize: isMobile ? '1.0rem' : '1.05rem', fontWeight: 400, lineHeight: 1.6, fontFamily: 'Inter, system-ui, sans-serif', letterSpacing: '0.01em', wordBreak: 'break-word', maxHeight: '600px', overflowY: 'auto', transition: 'all 0.3s ease-in-out', transform: 'translateY(0)', animation: 'fadeIn 0.4s ease-out', whiteSpace: 'normal' }}
+                style={{ 
+                  textAlign: 'left', 
+                  background: 'linear-gradient(to bottom right, #ffffff, #f8f9fa)', 
+                  color: '#222', 
+                  borderRadius: '12px', 
+                  border: '1px solid #e0e0e0', 
+                  boxShadow: '0 12px 28px rgba(0,0,0,0.12)', 
+                  padding: isSmallMobile ? '15px 12px' : isMobile ? '20px 15px' : '28px 32px', 
+                  fontSize: isSmallMobile ? '0.95rem' : isMobile ? '1.0rem' : '1.05rem', 
+                  fontWeight: 400, 
+                  lineHeight: 1.6, 
+                  fontFamily: 'Inter, system-ui, sans-serif', 
+                  letterSpacing: '0.01em', 
+                  wordBreak: 'break-word', 
+                  maxHeight: isSmallMobile ? '400px' : '600px', 
+                  overflowY: 'auto', 
+                  transition: 'all 0.3s ease-in-out', 
+                  transform: 'translateY(0)', 
+                  animation: 'fadeIn 0.4s ease-out', 
+                  whiteSpace: 'normal' 
+                }}
               />
             </div>
           )}
 
           {/* Form section */}
-          <div style={{ 
-            display: 'flex', 
-            gap: '15px',
-            marginBottom: '25px',
-          }}>
-            <button 
-              onClick={generateCaption}
-              style={{ 
-                padding: '12px 24px', 
-                background: themeColor,
-                color: 'white', 
-                border: 'none', 
-                borderRadius: '8px',
-                fontWeight: '600',
-                fontSize: '0.95rem',
-                width: '100%',
-                transition: 'all 0.2s ease',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
-              }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.15)';
-              }}
-            >
-              Generate Caption
-            </button>
-          </div>
-          
-          {/* Customization Input */}
           <div style={{ marginBottom: '25px', textAlign: 'left' }}>
             <label style={{ 
               display: 'block', 
               marginBottom: '8px', 
-              fontSize: '0.9rem',
+              fontSize: isMobile ? '0.85rem' : '0.9rem',
               color: 'rgba(255, 255, 255, 0.7)',
               fontWeight: '500'
             }}>
@@ -452,8 +477,8 @@ ${commonFooter}
               placeholder="e.g., Black Friday 50% OFF | Limited seats available!" 
               style={{ 
                 width: '100%', 
-                padding: '14px 16px', 
-                fontSize: '1rem', 
+                padding: isSmallMobile ? '12px 14px' : '14px 16px', 
+                fontSize: isMobile ? '0.95rem' : '1rem', 
                 backgroundColor: 'rgba(255, 255, 255, 0.06)',
                 color: 'white',
                 border: '1px solid rgba(255, 255, 255, 0.15)',
@@ -472,6 +497,38 @@ ${commonFooter}
                 e.target.style.boxShadow = 'none';
               }}
             />
+          </div>
+          
+          <div style={{ 
+            display: 'flex', 
+            gap: '15px',
+            marginBottom: '25px',
+          }}>
+            <button 
+              onClick={generateCaption}
+              style={{ 
+                padding: isSmallMobile ? '10px 16px' : '12px 24px', 
+                background: themeColor,
+                color: 'white', 
+                border: 'none', 
+                borderRadius: '8px',
+                fontWeight: '600',
+                fontSize: isMobile ? '0.9rem' : '0.95rem',
+                width: '100%',
+                transition: 'all 0.2s ease',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.15)';
+              }}
+            >
+              Generate Caption
+            </button>
           </div>
         </div>
       </header>

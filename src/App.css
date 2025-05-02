@@ -1,6 +1,7 @@
 /* Add global responsive styles */
 * {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -13,12 +14,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #282c34;
   min-height: 100vh;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 .App {
   text-align: center;
   min-height: 100vh;
   width: 100%;
+  overflow-x: hidden;
 }
 
 .App-logo {
@@ -43,6 +47,7 @@ body {
   color: white;
   padding: 20px;
   width: 100%;
+  position: relative;
 }
 
 .App-link {
@@ -63,6 +68,13 @@ h1 {
   font-size: 2rem;
 }
 
+/* Base button style enhancement for touch devices */
+button {
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+/* Medium screens - tablets and small laptops */
 @media (max-width: 768px) {
   h1 {
     font-size: 1.6rem;
@@ -71,17 +83,59 @@ h1 {
   .App-header {
     padding: 15px 10px;
   }
+  
+  /* Improve spacing on forms */
+  input, select, textarea {
+    font-size: 16px !important; /* Prevent zoom on focus in iOS */
+  }
 }
 
+/* Small screens - mobile phones */
 @media (max-width: 480px) {
   h1 {
     font-size: 1.4rem;
   }
+  
+  .App-header {
+    padding: 10px 8px;
+  }
+  
+  /* More compact UI for small screens */
+  .App-header > div {
+    margin-bottom: 15px;
+  }
 }
 
-/* For very small screens */
+/* Extra small screens */
 @media (max-width: 360px) {
   h1 {
     font-size: 1.2rem;
+  }
+  
+  .App-header {
+    padding: 8px 5px;
+  }
+}
+
+/* Fix for iOS momentum scrolling */
+@supports (-webkit-overflow-scrolling: touch) {
+  body {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Prevent element highlighting on tap */
+  a, button, input, select, textarea {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Dark mode preference support */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #121212;
+  }
+  
+  .App-header {
+    background-color: #121212;
   }
 }

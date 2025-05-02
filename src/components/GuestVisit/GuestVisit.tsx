@@ -93,12 +93,94 @@ const GuestVisit: React.FC<GuestVisitProps> = ({ onBackToMenu }) => {
   return (
     <div className="App">
       <header className="App-header">
-        <h1 style={{ marginBottom: '10px' }}>Guest Visit Caption Generator</h1>
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          width: '100%',
+          maxWidth: '800px',
+          marginBottom: '15px',
+          position: isMobile ? 'sticky' : 'relative',
+          top: isMobile ? '0' : 'auto',
+          zIndex: 10,
+          padding: isMobile ? '10px' : '0',
+          backgroundColor: isMobile ? 'rgba(40, 44, 52, 0.95)' : 'transparent',
+          backdropFilter: isMobile ? 'blur(10px)' : 'none',
+          borderBottom: isMobile ? '1px solid rgba(255, 255, 255, 0.1)' : 'none',
+        }}>
+          <div style={{ display: 'flex', gap: '10px' }}>
+            <button 
+              onClick={onBackToMenu}
+              style={{ 
+                padding: '8px 14px', 
+                background: 'transparent', 
+                color: 'white', 
+                border: '1px solid rgba(255, 255, 255, 0.3)', 
+                borderRadius: '8px',
+                fontWeight: '500',
+                fontSize: '0.9rem',
+                transition: 'all 0.2s ease',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.5)';
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.background = 'transparent';
+                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+              }}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+              </svg>
+              Back
+            </button>
+            
+            <button 
+              onClick={onBackToMenu}
+              style={{ 
+                padding: '8px 14px', 
+                background: 'transparent', 
+                color: 'white', 
+                border: '1px solid rgba(255, 255, 255, 0.3)', 
+                borderRadius: '8px',
+                fontWeight: '500',
+                fontSize: '0.9rem',
+                transition: 'all 0.2s ease',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.5)';
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.background = 'transparent';
+                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+              }}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/>
+                <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/>
+              </svg>
+              Home
+            </button>
+          </div>
+        </div>
+        
+        <h1 style={{ 
+          marginBottom: '10px',
+          fontSize: isSmallMobile ? '1.5rem' : isMobile ? '1.8rem' : '2rem' 
+        }}>Guest Visit Caption Generator</h1>
         <p style={{ 
           margin: '0 0 25px 0', 
           opacity: 0.8, 
-          fontSize: '1rem', 
-          maxWidth: '600px' 
+          fontSize: isMobile ? '0.9rem' : '1rem', 
+          maxWidth: '600px',
+          padding: '0 15px'
         }}>
           Create professional social media captions for guest visits in seconds.
         </p>
@@ -199,41 +281,16 @@ const GuestVisit: React.FC<GuestVisitProps> = ({ onBackToMenu }) => {
             marginBottom: '25px',
           }}>
             <button 
-              onClick={onBackToMenu}
-              style={{ 
-                padding: '12px 20px', 
-                background: 'transparent', 
-                color: 'white', 
-                border: '1px solid rgba(255, 255, 255, 0.3)', 
-                borderRadius: '8px',
-                fontWeight: '500',
-                fontSize: '0.95rem',
-                transition: 'all 0.2s ease',
-                flexShrink: 0,
-              }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
-                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.5)';
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.background = 'transparent';
-                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.3)';
-              }}
-            >
-              ← Back
-            </button>
-            
-            <button 
               onClick={generateCaption}
               style={{ 
-                padding: '12px 24px', 
+                padding: isSmallMobile ? '10px 16px' : '12px 24px', 
                 background: selectedTemplateColor,
                 color: 'white', 
                 border: 'none', 
                 borderRadius: '8px',
                 fontWeight: '600',
-                fontSize: '0.95rem',
-                flexGrow: 1,
+                fontSize: isMobile ? '0.9rem' : '0.95rem',
+                width: '100%',
                 transition: 'all 0.2s ease',
                 boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
               }}
@@ -251,69 +308,39 @@ const GuestVisit: React.FC<GuestVisitProps> = ({ onBackToMenu }) => {
           </div>
           
           {/* Template selection - modern style */}
-          <div style={{ marginBottom: '25px', textAlign: 'left' }}>
+          <div style={{ textAlign: 'left', marginBottom: '20px' }}>
             <label style={{ 
               display: 'block', 
               marginBottom: '10px', 
-              fontSize: '0.9rem',
-              color: 'rgba(255, 255, 255, 0.7)',
-              fontWeight: '500',
-              textTransform: 'uppercase',
-              letterSpacing: '0.05em'
+              color: 'rgba(255, 255, 255, 0.9)',
+              fontSize: isMobile ? '0.85rem' : '0.9rem',
+              fontWeight: '500'
             }}>
-              Template Style
+              Template Type:
             </label>
             <div style={{ 
-              display: 'grid', 
-              gridTemplateColumns: isMobile ? '1fr' : 'repeat(4, 1fr)', 
-              gap: '12px' 
+              display: 'flex', 
+              flexWrap: 'wrap', 
+              gap: '10px',
+              justifyContent: isSmallMobile ? 'center' : 'flex-start'
             }}>
-              {templateVariations.map(template => (
+              {templateVariations.map(variation => (
                 <button
-                  key={template.id}
-                  onClick={() => setTemplateType(template.id)}
+                  key={variation.id}
+                  onClick={() => setTemplateType(variation.id)}
                   style={{
-                    padding: '15px',
-                    minWidth: '150px',
-                    height: '48px',
-                    background: templateType === template.id ? 
-                      template.color : 
-                      'rgba(255, 255, 255, 0.08)',
-                    color: templateType === template.id ? 
-                      'white' : 
-                      'rgba(255, 255, 255, 0.8)',
-                    border: templateType === template.id ?
-                      'none' :
-                      '1px solid rgba(255, 255, 255, 0.1)',
-                    borderRadius: '10px',
+                    padding: isSmallMobile ? '6px 12px' : '8px 15px',
+                    background: templateType === variation.id ? variation.color : 'rgba(255, 255, 255, 0.08)',
+                    color: templateType === variation.id ? 'white' : 'rgba(255, 255, 255, 0.9)',
+                    border: 'none',
+                    borderRadius: '6px',
+                    fontSize: isSmallMobile ? '0.85rem' : '0.9rem',
+                    fontWeight: templateType === variation.id ? 600 : 500,
                     cursor: 'pointer',
-                    fontWeight: templateType === template.id ? '600' : '500',
-                    fontSize: '0.95rem',
-                    transition: 'all 0.25s ease',
-                    boxShadow: templateType === template.id ? 
-                      '0 4px 12px rgba(0,0,0,0.2)' : 
-                      'none',
-                    whiteSpace: 'nowrap',
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                  onMouseOver={(e) => {
-                    if (templateType !== template.id) {
-                      e.currentTarget.style.background = 'rgba(255, 255, 255, 0.12)';
-                      e.currentTarget.style.transform = 'translateY(-1px)';
-                    }
-                  }}
-                  onMouseOut={(e) => {
-                    if (templateType !== template.id) {
-                      e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)';
-                      e.currentTarget.style.transform = 'translateY(0)';
-                    }
+                    transition: 'all 0.2s',
                   }}
                 >
-                  {template.name}
+                  {variation.name}
                 </button>
               ))}
             </div>
