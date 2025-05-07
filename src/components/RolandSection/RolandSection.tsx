@@ -9,11 +9,7 @@ interface RolandSectionProps {
 const RolandSection: React.FC<RolandSectionProps> = ({ onOptionSelect, onBackToMenu }) => {
   const { width } = useWindowSize();
   const isMobile = width <= 768;
-  const isSmallMobile = width <= 480;
   
-  // Theme color for this component
-  const themeColor = '#6A5ACD'; // A purple color for distinction
-
   const handleEmailSelect = (type: string) => {
     onOptionSelect(type);
   };

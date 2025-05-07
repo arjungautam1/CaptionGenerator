@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import toast from 'react-hot-toast';
 import useWindowSize from '../../hooks/useWindowSize';
 
@@ -37,7 +37,27 @@ const CoursePromo: React.FC<CoursePromoProps> = ({ courseType, onBackToMenu }) =
 
     switch (courseType) {
       case 'network-cabling':
-        template = `🚨 𝗗𝗧𝗜𝗟 𝟭𝟬𝟭: 𝗡𝗲𝘁𝘄𝗼𝗿𝗸 𝗖𝗮𝗯𝗹𝗶𝗻𝗴 𝗧𝗲𝗰𝗵𝗻𝗶𝗰𝗶𝗮𝗻 𝗖𝗼𝘂𝗿𝘀𝗲 at 𝗗𝗲𝗹𝗺𝗶 𝗧𝗿𝗮𝗶𝗻𝗶𝗻𝗴 𝗜𝗻𝘀𝘁𝗶𝘁u𝘁𝗲! 🚨\n\n<b>𝙉𝙚𝙩𝙬𝙤𝙧k Cabling Technician</b>\nMaster the essentials of 𝘀𝘁𝗿𝘂𝗰𝘁𝘂𝗿𝗲𝗱 𝗰𝗮𝗯𝗹𝗶𝗻𝗴, 𝗳𝗶𝗯𝗲𝗿 𝗼𝗽𝘁𝗶𝗰𝘀, and 𝗻𝗲𝘁𝘄𝗼𝗿𝗸 𝗶𝗻𝘀𝘁𝗮𝗹𝗹𝗮𝘁𝗶𝗼𝗻 with our comprehensive, hands-on program. Build the foundation for a successful career in IT and telecommunications.\n\n✨ 𝗣𝗿𝗼𝗴𝗿𝗮𝗺 𝗛𝗶𝗴𝗵𝗹𝗶𝗴𝗵𝘁𝙨 ✨\n🔹 Learn from expert instructors with 𝟯𝟬+ 𝘆𝗲𝗮𝗿𝘀 of industry experience\n🔹 Intensive 𝗵𝗮𝗻𝗱𝘀-𝗼𝗻 𝗹𝗮𝗯𝘀 using industry-standard tools and equipment.\n🔹 Gain skills in 𝘁𝗲𝗿𝗺𝗶𝗻𝗮𝘁𝗶𝗼𝗻, 𝘁𝗲𝘀𝘁𝗶𝗻𝗴, and 𝘁𝗿𝗼𝘂𝗯𝗹𝗲𝘀𝗵𝗼𝗼𝘁𝗶𝗻𝗴 copper and fiber networks.\n🔹 Earn a 𝗖𝗮𝗻𝗮𝗱𝗶𝗮𝗻 𝗶𝗻𝗱𝘂𝘀𝘁𝗿𝘆-𝗿𝗲𝗰𝗼𝗴𝗻𝗶𝘇𝗲𝗱 𝗰𝗲𝗿𝘁𝗶𝗳𝗶𝗰𝗮𝘁𝗶𝗼𝗻.${offerText}\n\n${commonFooter}\n\n🚀 Launch your career in network infrastructure with Delmi!\n\n#DTIL101 #NetworkCabling #StructuredCabling #FiberOptics #ITInfrastructure #DelmiTraining #HandsOnTraining #SkilledTrades #CablingTechnician #JobReadyCanada #NetworkCablingTechnician #SkillTradeinCanda`;
+        template = `🚨 𝗗𝗧𝗜𝗟 𝟭𝟬𝟭: 𝗡𝗲𝘁𝘄𝗼𝗿𝗸 𝗖𝗮𝗯𝗹𝗶𝗻𝗴 𝗧𝗲𝗰𝗵𝗻𝗶𝗰𝗶𝗮𝗻 𝗖𝗼𝘂𝗿𝘀𝗲 at 𝗗𝗲𝗹𝗺𝗶 𝗧𝗿𝗮𝗶𝗻𝗶𝗻𝗴 𝗜𝗻𝘀𝘁𝗶𝘁𝘂𝘁𝗲! 🚨
+
+Master the essentials of 𝘀𝘁𝗿𝘂𝗰𝘁𝘂𝗿𝗲𝗱 𝗰𝗮𝗯𝗹𝗶𝗻𝗴, 𝗳𝗶𝗯𝗲𝗿 𝗼𝗽𝘁𝗶𝗰𝘀, and 𝗻𝗲𝘁𝘄𝗼𝗿𝗸 𝗶𝗻𝘀𝘁𝗮𝗹𝗹𝗮𝘁𝗶𝗼𝗻 with our comprehensive, hands-on program.
+Build the foundation for a successful career in IT and telecommunications.
+
+✨ 𝗣𝗿𝗼𝗴𝗿𝗮𝗺 𝗛𝗶𝗴𝗵𝗹𝗶𝗴𝗵𝘁𝘀 ✨
+🔹 Learn from expert instructors with 𝟯𝟬+ 𝘆𝗲𝗮𝗿𝘀 of industry experience
+🔹 Intensive 𝗵𝗮𝗻𝗱𝘀-𝗼𝗻 𝗹𝗮𝗯𝘀 using industry-standard tools and equipment
+🔹 Gain skills in 𝘁𝗲𝗿𝗺𝗶𝗻𝗮𝘁𝗶𝗼𝗻, 𝘁𝗲𝘀𝘁𝗶𝗻𝗴, and 𝘁𝗿𝗼𝘂𝗯𝗹𝗲𝘀𝗵𝗼𝗼𝘁𝗶𝗻𝗴 copper and fiber networks
+🔹 Earn a 𝗖𝗮𝗻𝗮𝗱𝗶𝗮𝗻 𝗶𝗻𝗱𝘂𝘀𝘁𝗿𝘆-𝗿𝗲𝗰𝗼𝗴𝗻𝗶𝘇𝗲𝗱 𝗰𝗲𝗿𝘁𝗶𝗳𝗶𝗰𝗮𝘁𝗶𝗼𝗻
+
+${offerText}
+
+${commonFooter}
+
+🚀 Launch your career in network infrastructure with Delmi!
+
+#DTIL101 #NetworkCabling #StructuredCabling #FiberOptics #ITInfrastructure
+#DelmiTraining #HandsOnTraining #SkilledTrades #CablingTechnician
+#JobReadyCanada #NetworkCablingTechnician #SkillTradeinCanada`;
+        
         break;
       case 'cctv-surveillance':
         template = `🚨 𝗗𝗧𝗜𝗟 𝟮𝟬𝟭: 𝗖𝗖𝗧𝗩 𝗦𝘂𝗿𝘃𝗲𝗶𝗹𝗹𝗮𝗻𝗰𝗲 𝗧𝗲𝗰𝗵𝗻𝗶𝗰𝗶𝗮𝗻 𝗖𝗼𝘂𝗿𝘀𝗲 at 𝗗𝗲𝗹𝗺𝗶 𝗧𝗿𝗮𝗶𝗻𝗶𝗻𝗴 𝗜𝗻𝘀𝘁𝗶𝘁𝘂𝘁𝗲! 🚨
