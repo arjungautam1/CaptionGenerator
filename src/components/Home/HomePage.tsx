@@ -1,6 +1,7 @@
 import React from 'react';
 import { platformsData, categoriesData } from '../../constants/icons';
 import useWindowSize from '../../hooks/useWindowSize';
+import RolandSection from '../RolandSection/RolandSection';
 
 interface HomePageProps {
   onOptionSelect: (option: string) => void;
@@ -81,6 +82,10 @@ const HomePage: React.FC<HomePageProps> = ({ onOptionSelect }) => {
               ))}
             </div>
           </div>
+
+          {/* Roland Section in the middle */}
+          <RolandSection onOptionSelect={onOptionSelect} />
+          
           {/* Social Media Platforms at Bottom */}
           <div style={{ 
             backgroundColor: 'rgba(255, 255, 255, 0.08)', 

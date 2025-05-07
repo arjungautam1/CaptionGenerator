@@ -4,6 +4,7 @@ import EmailTemplate from './components/EmailTemplate/EmailTemplate';
 import HomePage from './components/Home/HomePage';
 import GuestVisit from './components/GuestVisit/GuestVisit';
 import CoursePromo from './components/CoursePromo/CoursePromo';
+import DelmiTrainingEmail from './components/RolandSection/DelmiTrainingEmail';
 import { Toaster } from 'react-hot-toast';
 
 function App() {
@@ -32,6 +33,53 @@ function App() {
                  courseType={selectedOption as ('network-cabling' | 'cctv-surveillance' | 'electronics-relays' | 'access-control')} 
                  onBackToMenu={handleBackToMenu} 
                />;
+      // Roland Section Email Templates
+      case 'delmi-training':
+        return <DelmiTrainingEmail onBackToMenu={handleBackToMenu} />;
+      case 'delmi-solutions':
+        // Placeholder for future implementation
+        return <div className="App">
+          <header className="App-header">
+            <h1>Delmi Solutions Email Template</h1>
+            <p>This email template will be implemented soon.</p>
+            <button 
+              onClick={handleBackToMenu}
+              style={{ 
+                padding: '10px 20px', 
+                background: '#4CAF50', 
+                border: 'none', 
+                borderRadius: '8px', 
+                color: 'white', 
+                marginTop: '20px',
+                cursor: 'pointer'
+              }}
+            >
+              Back to Home
+            </button>
+          </header>
+        </div>;
+      case 'shidaa-foundations':
+        // Placeholder for future implementation
+        return <div className="App">
+          <header className="App-header">
+            <h1>Shidaa Foundations Email Template</h1>
+            <p>This email template will be implemented soon.</p>
+            <button 
+              onClick={handleBackToMenu}
+              style={{ 
+                padding: '10px 20px', 
+                background: '#FF9800', 
+                border: 'none', 
+                borderRadius: '8px', 
+                color: 'white', 
+                marginTop: '20px',
+                cursor: 'pointer'
+              }}
+            >
+              Back to Home
+            </button>
+          </header>
+        </div>;
       default:
         return <HomePage onOptionSelect={handleOptionSelect} />;
     }
