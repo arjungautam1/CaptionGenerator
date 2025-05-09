@@ -7,6 +7,8 @@ import reportWebVitals from './reportWebVitals';
 // Custom styles for the app
 import './index.css';
 
+import logo from './delmi-logo.svg';
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
