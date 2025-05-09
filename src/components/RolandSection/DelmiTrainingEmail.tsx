@@ -46,39 +46,51 @@ const DelmiTrainingEmail: React.FC<DelmiTrainingEmailProps> = ({ onBackToMenu })
 
   const generateEmailTemplate = () => {
     const greeting = companyName || '[Company Name / Hiring Manager]';
-    
-    // Create video links section
-    let videoSection = '';
-    let videoHtmlSection = '';
-    if (selectedVideoLinks.length > 0) {
-      videoSection = 'Below are video links that offer a closer look into our facility and training approach:\n\n';
-      videoHtmlSection = '<p style="margin: 15px 0 5px 0;"><strong>Below are video links that offer a closer look into our facility and training approach:</strong></p><ul style="margin: 10px 0; padding-left: 30px;">';
-      
-      selectedVideoLinks.forEach(link => {
-        const option = videoOptions.find(opt => opt.url === link);
-        const title = option ? option.title : link;
-        const url = option ? option.url : link;
-        videoSection += `    • ${title}: ${url}\n`;
-        videoHtmlSection += `<li style="margin: 5px 0;"><strong>${title}:</strong> <a href="${url}" target="_blank" style="color: #4E7BB5; text-decoration: underline;">${url}</a></li>`;
-      });
-      
-      videoHtmlSection += '</ul>';
-    }
-    
-    // Create plain text template - remove Subject line from body
-    const template = `Dear ${greeting},\n\nI hope this message finds you well.\n\nI'm writing to introduce Delmi Training Institute, a leading trade school specializing in hands-on, industry-aligned training in Network Cabling, CCTV Design, Configuration & Installation, Electronic Relays & Circuits, and Access Control Systems. Since our founding in 2016, we have proudly trained hundreds of students who have gone on to become key contributors in the cabling and electronic security sectors across the Greater Toronto and Hamilton Area (GTHA) and beyond.\n\nOur training model is unique and results-driven. Each student undergoes a 4-week, instructor-led in-class technical bootcamp, where they spend one week on each specialized module, followed by two additional weeks of on-field, real-world experience. This approach ensures graduates are not only technically proficient but also job-ready from day one.\n\nWhat sets us apart:\n\n    • Courses are 100% hands-on and instructor-led\n    • Graduates receive real-world exposure through a two-week internship\n    • Over 50 five-star reviews from satisfied students and employers\n    • 98% of our students are successfully employed after graduation\n    • New training cohorts begin every 6 weeks, ensuring a steady pipeline of trained technicians\n\nWe are currently expanding our placement network and are looking to partner with companies like yours who are seeking reliable, certified, and field-ready technicians in cabling and electronic security.\n\nBy partnering with Delmi Training Institute, you gain:\n\n    • Direct access to our pool of trained and job-ready graduates\n    • A consistent, cost-effective source for new hires\n    • The opportunity to influence and guide future training curriculums\n\nWe believe this partnership could be a significant asset to your team and operations.\n${videoSection}\nI would be happy to connect further and explore how we can work together. Thank you for considering Delmi Training Institute as your trusted partner in talent development.\n\n\nWarm regards,\n\nRoland Akwensivie\nPresident\nDelmi Training Institute\nPhone: 905-783-3564 | Cell: 416-729-8645\nEmail: roland@delmitraining.com\nWebsite: www.delmitraining.com`;
-    
-    // Create HTML template for display - remove Subject line from body
+    // Video links (static order and URLs as per user request)
+    const videoLinks = [
+      { title: "Muhammad's Story", url: "https://www.youtube.com/shorts/eQUHuXK3SM4" },
+      { title: "Parminder's Story", url: "https://www.youtube.com/shorts/ZcgP2daBoYA" },
+      { title: "Shane's Story", url: "https://www.youtube.com/shorts/htsujuk-deU" },
+      { title: "Allison's Story", url: "https://www.youtube.com/shorts/_YG2x-NxtPc" },
+      { title: "Malik's Story", url: "https://www.youtube.com/shorts/qwAEsv6ItZs" },
+    ];
+    const socialLinks = [
+      { label: 'LinkedIn', url: 'https://www.linkedin.com/company/delmi-training/' },
+      { label: 'YouTube', url: 'https://www.youtube.com/@Delmitraining' },
+      { label: 'Facebook', url: 'https://www.facebook.com/Delmitraining' },
+      { label: 'Instagram', url: 'https://www.instagram.com/delmitraining' },
+    ];
+    // Video links as plain text
+    const videoSection =
+      'We believe this partnership could be a significant asset to your team and operations.\n' +
+      'Below are video links that offer a closer look into our facility and training approach:\n\n' +
+      videoLinks.map(v => `    • ${v.title}: ${v.url}`).join('\n') +
+      '\n\nPlease check out our other social media platforms for additional interesting videos and information\n' +
+      socialLinks.map(s => `${s.label}: ${s.url}`).join('\n') +
+      '\n\nI would be happy to connect further and explore how we can work together. Thank you for considering Delmi Training Institute as your trusted partner in talent development.';
+
+    // Video links as HTML
+    const videoHtmlSection = `
+      <p style="margin: 15px 0;">We believe this partnership could be a significant asset to your team and operations.</p>
+      <p style="margin: 15px 0 5px 0;"><strong>Below are video links that offer a closer look into our facility and training approach:</strong></p>
+      <ul style="margin: 10px 0; padding-left: 30px;">
+        ${videoLinks.map(v => `<li style=\"margin: 5px 0;\"><strong>${v.title}:</strong> <a href=\"${v.url}\" target=\"_blank\" style=\"color: #4E7BB5; text-decoration: underline;\">${v.url}</a></li>`).join('')}
+      </ul>
+      <p style="margin: 15px 0 5px 0;">Please check out our other social media platforms for additional interesting videos and information</p>
+      <ul style="margin: 10px 0; padding-left: 30px;">
+        ${socialLinks.map(s => `<li style=\"margin: 5px 0;\"><strong>${s.label}:</strong> <a href=\"${s.url}\" target=\"_blank\" style=\"color: #4E7BB5; text-decoration: underline;\">${s.url}</a></li>`).join('')}
+      </ul>
+      <p style="margin: 15px 0;">I would be happy to connect further and explore how we can work together. Thank you for considering Delmi Training Institute as your trusted partner in talent development.</p>
+    `;
+
+    const template = `Dear ${greeting},\n\nI hope this message finds you well.\n\nI'm writing to introduce Delmi Training Institute, a leading trade school specializing in hands-on, industry-aligned training in Network Cabling, CCTV Design, Configuration & Installation, Electronic Relays & Circuits, and Access Control Systems. Since our founding in 2016, we have proudly trained hundreds of students who have gone on to become key contributors in the cabling and electronic security sectors across the Greater Toronto and Hamilton Area (GTHA) and beyond.\n\nOur training model is unique and results-driven. Each student undergoes a 4-week, instructor-led in-class technical bootcamp, where they spend one week on each specialized module, followed by two additional weeks of on-field, real-world experience. This approach ensures graduates are not only technically proficient but also job-ready from day one.\n\nWhat sets us apart:\n\n    • Courses are 100% hands-on and instructor-led\n    • Graduates receive real-world exposure through a two-week internship\n    • Over 50 five-star reviews from satisfied students and employers\n    • 98% of our students are successfully employed after graduation\n    • New training cohorts begin every 6 weeks, ensuring a steady pipeline of trained technicians\n\nWe are currently expanding our placement network and are looking to partner with companies like yours who are seeking reliable, certified, and field-ready technicians in cabling and electronic security.\n\nBy partnering with Delmi Training Institute, you gain:\n\n    • Direct access to our pool of trained and job-ready graduates\n    • A consistent, cost-effective source for new hires\n    • The opportunity to influence and guide future training curriculums\n\n${videoSection}`;
+
     const htmlTemplate = `
       <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
         <p style="margin: 15px 0;">Dear ${greeting},</p>
-        
         <p style="margin: 15px 0;">I hope this message finds you well.</p>
-        
         <p style="margin: 15px 0;">I'm writing to introduce Delmi Training Institute, a leading trade school specializing in hands-on, industry-aligned training in Network Cabling, CCTV Design, Configuration & Installation, Electronic Relays & Circuits, and Access Control Systems. Since our founding in 2016, we have proudly trained hundreds of students who have gone on to become key contributors in the cabling and electronic security sectors across the Greater Toronto and Hamilton Area (GTHA) and beyond.</p>
-        
         <p style="margin: 15px 0;">Our training model is unique and results-driven. Each student undergoes a 4-week, instructor-led in-class technical bootcamp, where they spend one week on each specialized module, followed by two additional weeks of on-field, real-world experience. This approach ensures graduates are not only technically proficient but also job-ready from day one.</p>
-        
         <p style="margin: 15px 0 5px 0;"><strong>What sets us apart:</strong></p>
         <ul style="margin: 10px 0; padding-left: 30px;">
           <li style="margin: 5px 0;">Courses are 100% hands-on and instructor-led</li>
@@ -87,27 +99,19 @@ const DelmiTrainingEmail: React.FC<DelmiTrainingEmailProps> = ({ onBackToMenu })
           <li style="margin: 5px 0;">98% of our students are successfully employed after graduation</li>
           <li style="margin: 5px 0;">New training cohorts begin every 6 weeks, ensuring a steady pipeline of trained technicians</li>
         </ul>
-        
         <p style="margin: 15px 0;">We are currently expanding our placement network and are looking to partner with companies like yours who are seeking reliable, certified, and field-ready technicians in cabling and electronic security.</p>
-        
         <p style="margin: 15px 0 5px 0;"><strong>By partnering with Delmi Training Institute, you gain:</strong></p>
         <ul style="margin: 10px 0; padding-left: 30px;">
           <li style="margin: 5px 0;">Direct access to our pool of trained and job-ready graduates</li>
           <li style="margin: 5px 0;">A consistent, cost-effective source for new hires</li>
           <li style="margin: 5px 0;">The opportunity to influence and guide future training curriculums</li>
         </ul>
-        
         ${videoHtmlSection}
-        
-        <p style="margin: 15px 0;">I would be happy to connect further and explore how we can work together. Thank you for considering Delmi Training Institute as your trusted partner in talent development.</p>
-        
-        
       </div>
     `;
-    
+
     setEmailTemplate(template);
     setEmailHtml(htmlTemplate);
-    
     setTimeout(() => {
       if (templateRef.current) {
         templateRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
