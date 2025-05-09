@@ -55,10 +55,10 @@ const DelmiTrainingEmail: React.FC<DelmiTrainingEmailProps> = ({ onBackToMenu })
       
       selectedVideoLinks.forEach(link => {
         const option = videoOptions.find(opt => opt.url === link);
-        if (option) {
-          videoSection += `    • ${option.title}: ${option.url}\n`;
-          videoHtmlSection += `<li style="margin: 5px 0;"><strong>${option.title}:</strong> <a href="${option.url}" target="_blank" style="color: #4E7BB5; text-decoration: underline;">${option.url}</a></li>`;
-        }
+        const title = option ? option.title : link;
+        const url = option ? option.url : link;
+        videoSection += `    • ${title}: ${url}\n`;
+        videoHtmlSection += `<li style="margin: 5px 0;"><strong>${title}:</strong> <a href="${url}" target="_blank" style="color: #4E7BB5; text-decoration: underline;">${url}</a></li>`;
       });
       
       videoHtmlSection += '</ul>';
@@ -102,15 +102,7 @@ const DelmiTrainingEmail: React.FC<DelmiTrainingEmailProps> = ({ onBackToMenu })
         
         <p style="margin: 15px 0;">I would be happy to connect further and explore how we can work together. Thank you for considering Delmi Training Institute as your trusted partner in talent development.</p>
         
-        <div style="margin-top: 25px;">
-          <p style="margin: 5px 0;">Warm regards,</p>
-          <p style="margin: 5px 0;"><strong>Roland Akwensivie</strong></p>
-          <p style="margin: 2px 0;">President</p>
-          <p style="margin: 2px 0;">Delmi Training Institute</p>
-          <p style="margin: 2px 0;">Phone: 905-783-3564 | Cell: 416-729-8645</p>
-          <p style="margin: 2px 0;">Email: roland@delmitraining.com</p>
-          <p style="margin: 2px 0;">Website: <a href="https://www.delmitraining.com" target="_blank" style="color: #4E7BB5; text-decoration: underline;">www.delmitraining.com</a></p>
-        </div>
+        
       </div>
     `;
     
@@ -150,6 +142,19 @@ const DelmiTrainingEmail: React.FC<DelmiTrainingEmailProps> = ({ onBackToMenu })
     });
   };
 
+  const subjectLine = "Partner With Delmi Training Institute – Your Trusted Source for Trained Network Cabling and Electronic Security Technicians";
+  const handleCopySubject = () => {
+    navigator.clipboard.writeText(subjectLine);
+    toast.success('Subject copied!', {
+      icon: '📋',
+      style: {
+        borderRadius: '10px',
+        background: '#333',
+        color: '#fff',
+      }
+    });
+  };
+
   const handleCopyToClipboard = () => {
     navigator.clipboard.writeText(emailTemplate);
     toast.success('Email template copied!', {
@@ -162,23 +167,8 @@ const DelmiTrainingEmail: React.FC<DelmiTrainingEmailProps> = ({ onBackToMenu })
     });
   };
 
-  const handleCopySubject = () => {
-    const subject = "Partner With Delmi Training Institute – Your Trusted Source for Trained Technicians";
-    navigator.clipboard.writeText(subject);
-    toast.success('Subject copied!', {
-      icon: '📋',
-      style: {
-        borderRadius: '10px',
-        background: '#333',
-        color: '#fff',
-      }
-    });
-  };
-
   const handleSendEmail = () => {
-    // Keep the subject for the mailto link
-    const subject = `Partner With Delmi Training Institute – Your Trusted Source for Trained Technicians`;
-    const mailtoLink = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailTemplate)}`;
+    const mailtoLink = `mailto:?subject=${encodeURIComponent(subjectLine)}&body=${encodeURIComponent(emailTemplate)}`;
     window.open(mailtoLink);
   };
 
