@@ -22,11 +22,11 @@ const DelmiTrainingEmail: React.FC<DelmiTrainingEmailProps> = ({ onBackToMenu })
   const videoOptions = [
     { title: "Alex Story", url: "https://youtube.com/shorts/jGWIkvDYiH8?si=kyt_mJaPxHsAhEF5" },
     { title: "Parminder Story", url: "https://youtube.com/shorts/ZcgP2daBoYA?si=5T3ATJv46aXyvkLU" },
-    { title: "Shane's Story", url: "https://youtube.com/shorts/htsujuk-deU?si=nHxg8vEA4RQQF24Z" },
-    { title: "Malik's Story", url: "https://youtube.com/shorts/qwAEsv6ItZs?si=5DEAQ4XXZfxrmfEz" },
-    { title: "Allison's Story", url: "https://youtube.com/shorts/_YG2x-NxtPc?si=5aCD8-GsoK-259Zv" },
-    { title: "Jay's Story", url: "https://youtube.com/shorts/NCQWjflufvM?si=2P4NhvWmS188sg8M" },
-    { title: "Muhammad's Story", url: "https://youtube.com/shorts/QSz7VWwqIFo?si=3Jzf4t294VER1FMA" },
+    { title: "Shane Story", url: "https://youtube.com/shorts/htsujuk-deU?si=nHxg8vEA4RQQF24Z" },
+    { title: "Malik Story", url: "https://youtube.com/shorts/qwAEsv6ItZs?si=5DEAQ4XXZfxrmfEz" },
+    { title: "Allison Story", url: "https://youtube.com/shorts/_YG2x-NxtPc?si=5aCD8-GsoK-259Zv" },
+    { title: "Jay Story", url: "https://youtube.com/shorts/NCQWjflufvM?si=2P4NhvWmS188sg8M" },
+    { title: "Muhammad Story", url: "https://youtube.com/shorts/QSz7VWwqIFo?si=3Jzf4t294VER1FMA" },
   ];
   const [selectedVideoLinks, setSelectedVideoLinks] = useState<string[]>([]);
 
