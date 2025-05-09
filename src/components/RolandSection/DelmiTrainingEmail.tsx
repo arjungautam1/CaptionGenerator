@@ -10,6 +10,7 @@ const DelmiTrainingEmail: React.FC<DelmiTrainingEmailProps> = ({ onBackToMenu })
   const [emailTemplate, setEmailTemplate] = useState('');
   const [emailHtml, setEmailHtml] = useState('');
   const [companyName, setCompanyName] = useState('');
+  const [recipientEmail, setRecipientEmail] = useState('');
   const templateRef = useRef<HTMLDivElement>(null);
   const { width } = useWindowSize();
   
@@ -20,13 +21,13 @@ const DelmiTrainingEmail: React.FC<DelmiTrainingEmailProps> = ({ onBackToMenu })
   const themeColor = '#4E7BB5';
 
   const videoOptions = [
-    { title: "Alex Story", url: "https://youtube.com/shorts/jGWIkvDYiH8?si=kyt_mJaPxHsAhEF5" },
-    { title: "Parminder Story", url: "https://youtube.com/shorts/ZcgP2daBoYA?si=5T3ATJv46aXyvkLU" },
-    { title: "Shane Story", url: "https://youtube.com/shorts/htsujuk-deU?si=nHxg8vEA4RQQF24Z" },
-    { title: "Malik Story", url: "https://youtube.com/shorts/qwAEsv6ItZs?si=5DEAQ4XXZfxrmfEz" },
-    { title: "Allison Story", url: "https://youtube.com/shorts/_YG2x-NxtPc?si=5aCD8-GsoK-259Zv" },
-    { title: "Jay Story", url: "https://youtube.com/shorts/NCQWjflufvM?si=2P4NhvWmS188sg8M" },
-    { title: "Muhammad Story", url: "https://youtube.com/shorts/QSz7VWwqIFo?si=3Jzf4t294VER1FMA" },
+    { title: "Alex's Story", url: "https://youtube.com/shorts/jGWIkvDYiH8?si=kyt_mJaPxHsAhEF5" },
+    { title: "Parminder's Story", url: "https://youtube.com/shorts/ZcgP2daBoYA?si=5T3ATJv46aXyvkLU" },
+    { title: "Shane's Story", url: "https://youtube.com/shorts/htsujuk-deU?si=nHxg8vEA4RQQF24Z" },
+    { title: "Malik's Story", url: "https://youtube.com/shorts/qwAEsv6ItZs?si=5DEAQ4XXZfxrmfEz" },
+    { title: "Allison's Story", url: "https://youtube.com/shorts/_YG2x-NxtPc?si=5aCD8-GsoK-259Zv" },
+    { title: "Jay's Story", url: "https://youtube.com/shorts/NCQWjflufvM?si=2P4NhvWmS188sg8M" },
+    { title: "Muhammad's Story", url: "https://youtube.com/shorts/eQUHuXK3SM4?feature=share" },
   ];
   const [selectedVideoLinks, setSelectedVideoLinks] = useState<string[]>([]);
 
@@ -96,8 +97,6 @@ const DelmiTrainingEmail: React.FC<DelmiTrainingEmailProps> = ({ onBackToMenu })
           <li style="margin: 5px 0;">The opportunity to influence and guide future training curriculums</li>
         </ul>
         
-        <p style="margin: 15px 0;">We believe this partnership could be a significant asset to your team and operations.</p>
-        
         ${videoHtmlSection}
         
         <p style="margin: 15px 0;">I would be happy to connect further and explore how we can work together. Thank you for considering Delmi Training Institute as your trusted partner in talent development.</p>
@@ -155,20 +154,71 @@ const DelmiTrainingEmail: React.FC<DelmiTrainingEmailProps> = ({ onBackToMenu })
     });
   };
 
-  const handleCopyToClipboard = () => {
-    navigator.clipboard.writeText(emailTemplate);
-    toast.success('Email template copied!', {
-      icon: '📋',
-      style: {
-        borderRadius: '10px',
-        background: '#333',
-        color: '#fff',
+  const handleCopyToClipboard = async () => {
+    try {
+      if (navigator.clipboard && window.ClipboardItem) {
+        const blob = new Blob([emailHtml], { type: 'text/html' });
+        const item = new window.ClipboardItem({ 'text/html': blob });
+        await navigator.clipboard.write([item]);
+        toast.success('HTML email copied!', {
+          icon: '📋',
+          style: {
+            borderRadius: '10px',
+            background: '#333',
+            color: '#fff',
+          }
+        });
+      } else {
+        throw new Error('HTML clipboard not supported in this browser.');
       }
-    });
+    } catch (err) {
+      toast.error('Copy as HTML is not supported in this browser.', {
+        icon: '❌',
+        style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        }
+      });
+    }
+  };
+
+  const handleCopyAsHtml = async () => {
+    try {
+      if (navigator.clipboard && window.ClipboardItem) {
+        const blob = new Blob([emailHtml], { type: 'text/html' });
+        const item = new window.ClipboardItem({ 'text/html': blob });
+        await navigator.clipboard.write([item]);
+        toast.success('HTML email copied!', {
+          icon: '📋',
+          style: {
+            borderRadius: '10px',
+            background: '#333',
+            color: '#fff',
+          }
+        });
+      } else {
+        throw new Error('HTML clipboard not supported in this browser.');
+      }
+    } catch (err) {
+      toast.error('Copy as HTML is not supported in this browser.', {
+        icon: '❌',
+        style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        }
+      });
+    }
+  };
+
+  const handleOpenOutlookWeb = () => {
+    const url = `https://outlook.live.com/mail/0/deeplink/compose?to=${encodeURIComponent(recipientEmail)}&subject=${encodeURIComponent(subjectLine)}&body=${encodeURIComponent(emailTemplate)}`;
+    window.open(url, '_blank');
   };
 
   const handleSendEmail = () => {
-    const mailtoLink = `mailto:?subject=${encodeURIComponent(subjectLine)}&body=${encodeURIComponent(emailTemplate)}`;
+    const mailtoLink = `mailto:${encodeURIComponent(recipientEmail)}?subject=${encodeURIComponent(subjectLine)}&body=${encodeURIComponent(emailTemplate)}`;
     window.open(mailtoLink);
   };
 
@@ -328,6 +378,33 @@ const DelmiTrainingEmail: React.FC<DelmiTrainingEmailProps> = ({ onBackToMenu })
                 ))}
               </div>
             </div>
+            <div style={{ marginBottom: '15px' }}>
+              <label style={{ 
+                display: 'block', 
+                textAlign: 'left', 
+                marginBottom: '8px', 
+                fontWeight: 500 
+              }}>
+                Recipient Email:
+              </label>
+              <input 
+                type="email" 
+                value={recipientEmail}
+                onChange={(e) => setRecipientEmail(e.target.value)}
+                placeholder="Enter recipient's email address"
+                style={{
+                  width: '100%',
+                  padding: '10px 12px',
+                  borderRadius: '8px',
+                  backgroundColor: 'rgba(255, 255, 255, 0.07)',
+                  border: '1px solid rgba(255, 255, 255, 0.15)',
+                  color: 'white',
+                  fontSize: '1rem',
+                  outline: 'none',
+                  transition: 'all 0.2s ease'
+                }}
+              />
+            </div>
             <button 
               onClick={generateEmailTemplate}
               style={{
@@ -413,8 +490,8 @@ const DelmiTrainingEmail: React.FC<DelmiTrainingEmailProps> = ({ onBackToMenu })
                 }}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                  <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
-                  <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                  <path d="M13.5 1a.5.5 0 0 1 .5.5v13a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 .5-.5h11zm-11-1A1.5 1.5 0 0 0 1 1.5v13A1.5 1.5 0 0 0 2.5 16h11a1.5 1.5 0 0 0 1.5-1.5v-13A1.5 1.5 0 0 0 13.5 0h-11z"/>
+                  <path d="M3 2.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v11a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-11zm1 .5v10h8v-10H4z"/>
                 </svg>
                 Copy Email
               </button>
@@ -448,6 +525,67 @@ const DelmiTrainingEmail: React.FC<DelmiTrainingEmailProps> = ({ onBackToMenu })
                   <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
                 </svg>
                 Copy Subject
+              </button>
+              
+              <button 
+                onClick={handleCopyAsHtml}
+                style={{
+                  flex: 1,
+                  backgroundColor: 'rgba(255, 255, 255, 0.08)',
+                  color: 'white',
+                  padding: '10px',
+                  borderRadius: '8px',
+                  border: '1px solid rgba(255, 255, 255, 0.12)',
+                  fontWeight: 'bold',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px'
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.15)';
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.08)';
+                }}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M13.5 1a.5.5 0 0 1 .5.5v13a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 .5-.5h11zm-11-1A1.5 1.5 0 0 0 1 1.5v13A1.5 1.5 0 0 0 2.5 16h11a1.5 1.5 0 0 0 1.5-1.5v-13A1.5 1.5 0 0 0 13.5 0h-11z"/>
+                  <path d="M3 2.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v11a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-11zm1 .5v10h8v-10H4z"/>
+                </svg>
+                Copy as HTML
+              </button>
+              
+              <button 
+                onClick={handleOpenOutlookWeb}
+                style={{
+                  flex: 1,
+                  backgroundColor: '#0072C6',
+                  color: 'white',
+                  padding: '10px',
+                  borderRadius: '8px',
+                  border: 'none',
+                  fontWeight: 'bold',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px'
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.backgroundColor = '#005a9e';
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.backgroundColor = '#0072C6';
+                }}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M2 4.5A2.5 2.5 0 0 1 4.5 2h15A2.5 2.5 0 0 1 22 4.5v15a2.5 2.5 0 0 1-2.5 2.5h-15A2.5 2.5 0 0 1 2 19.5v-15Zm2.5-1A1.5 1.5 0 0 0 3 4.5v15A1.5 1.5 0 0 0 4.5 21h15a1.5 1.5 0 0 0 1.5-1.5v-15A1.5 1.5 0 0 0 19.5 3h-15ZM6 7.75A.75.75 0 0 1 6.75 7h10.5a.75.75 0 0 1 0 1.5H6.75A.75.75 0 0 1 6 7.75Zm0 4A.75.75 0 0 1 6.75 11h10.5a.75.75 0 0 1 0 1.5H6.75A.75.75 0 0 1 6 11.75Zm0 4A.75.75 0 0 1 6.75 15h6.5a.75.75 0 0 1 0 1.5h-6.5A.75.75 0 0 1 6 15.75Z"/>
+                </svg>
+                Open in Outlook Web
               </button>
               
               <button 
