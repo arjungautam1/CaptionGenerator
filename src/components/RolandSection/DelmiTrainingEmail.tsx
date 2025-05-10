@@ -46,14 +46,8 @@ const DelmiTrainingEmail: React.FC<DelmiTrainingEmailProps> = ({ onBackToMenu })
 
   const generateEmailTemplate = () => {
     const greeting = companyName || '[Company Name / Hiring Manager]';
-    // Video links (static order and URLs as per user request)
-    const videoLinks = [
-      { title: "Muhammad's Story", url: "https://www.youtube.com/shorts/eQUHuXK3SM4" },
-      { title: "Parminder's Story", url: "https://www.youtube.com/shorts/ZcgP2daBoYA" },
-      { title: "Shane's Story", url: "https://www.youtube.com/shorts/htsujuk-deU" },
-      { title: "Allison's Story", url: "https://www.youtube.com/shorts/_YG2x-NxtPc" },
-      { title: "Malik's Story", url: "https://www.youtube.com/shorts/qwAEsv6ItZs" },
-    ];
+    // Only include selected video links
+    const selectedVideos = videoOptions.filter(v => selectedVideoLinks.includes(v.url));
     const socialLinks = [
       { label: 'LinkedIn', url: 'https://www.linkedin.com/company/delmi-training/' },
       { label: 'YouTube', url: 'https://www.youtube.com/@Delmitraining' },
@@ -63,25 +57,26 @@ const DelmiTrainingEmail: React.FC<DelmiTrainingEmailProps> = ({ onBackToMenu })
     // Video links as plain text
     const videoSection =
       'We believe this partnership could be a significant asset to your team and operations.\n' +
-      'Below are video links that offer a closer look into our facility and training approach:\n\n' +
-      videoLinks.map(v => `    • ${v.title}: ${v.url}`).join('\n') +
-      '\n\nPlease check out our other social media platforms for additional interesting videos and information\n' +
+      (selectedVideos.length > 0
+        ? 'Below are video links that offer a closer look into our facility and training approach:\n\n' +
+          selectedVideos.map(v => `    • ${v.title}: ${v.url}`).join('\n') + '\n\n'
+        : '') +
+      'Please check out our other social media platforms for additional interesting videos and information\n' +
       socialLinks.map(s => `${s.label}: ${s.url}`).join('\n') +
       '\n\nI would be happy to connect further and explore how we can work together. Thank you for considering Delmi Training Institute as your trusted partner in talent development.';
 
     // Video links as HTML
-    const videoHtmlSection = `
-      <p style="margin: 15px 0;">We believe this partnership could be a significant asset to your team and operations.</p>
-      <p style="margin: 15px 0 5px 0;"><strong>Below are video links that offer a closer look into our facility and training approach:</strong></p>
-      <ul style="margin: 10px 0; padding-left: 30px;">
-        ${videoLinks.map(v => `<li style=\"margin: 5px 0;\"><strong>${v.title}:</strong> <a href=\"${v.url}\" target=\"_blank\" style=\"color: #4E7BB5; text-decoration: underline;\">${v.url}</a></li>`).join('')}
-      </ul>
-      <p style="margin: 15px 0 5px 0;">Please check out our other social media platforms for additional interesting videos and information</p>
-      <ul style="margin: 10px 0; padding-left: 30px;">
-        ${socialLinks.map(s => `<li style=\"margin: 5px 0;\"><strong>${s.label}:</strong> <a href=\"${s.url}\" target=\"_blank\" style=\"color: #4E7BB5; text-decoration: underline;\">${s.url}</a></li>`).join('')}
-      </ul>
-      <p style="margin: 15px 0;">I would be happy to connect further and explore how we can work together. Thank you for considering Delmi Training Institute as your trusted partner in talent development.</p>
-    `;
+    const videoHtmlSection =
+      `<p style="margin: 15px 0;">We believe this partnership could be a significant asset to your team and operations.</p>` +
+      (selectedVideos.length > 0
+        ? `<p style="margin: 15px 0 5px 0;"><strong>Below are video links that offer a closer look into our facility and training approach:</strong></p>\n<ul style=\"margin: 10px 0; padding-left: 30px;\">` +
+          selectedVideos.map(v => `<li style=\"margin: 5px 0;\"><strong>${v.title}:</strong> <a href=\"${v.url}\" target=\"_blank\" style=\"color: #4E7BB5; text-decoration: underline;\">${v.url}</a></li>`).join('') +
+          '</ul>'
+        : '') +
+      `<p style="margin: 15px 0 5px 0;">Please check out our other social media platforms for additional interesting videos and information</p>\n<ul style=\"margin: 10px 0; padding-left: 30px;\">` +
+      socialLinks.map(s => `<li style=\"margin: 5px 0;\"><strong>${s.label}:</strong> <a href=\"${s.url}\" target=\"_blank\" style=\"color: #4E7BB5; text-decoration: underline;\">${s.url}</a></li>`).join('') +
+      '</ul>' +
+      '<p style="margin: 15px 0;">I would be happy to connect further and explore how we can work together. Thank you for considering Delmi Training Institute as your trusted partner in talent development.</p>';
 
     const template = `Dear ${greeting},\n\nI hope this message finds you well.\n\nI'm writing to introduce Delmi Training Institute, a leading trade school specializing in hands-on, industry-aligned training in Network Cabling, CCTV Design, Configuration & Installation, Electronic Relays & Circuits, and Access Control Systems. Since our founding in 2016, we have proudly trained hundreds of students who have gone on to become key contributors in the cabling and electronic security sectors across the Greater Toronto and Hamilton Area (GTHA) and beyond.\n\nOur training model is unique and results-driven. Each student undergoes a 4-week, instructor-led in-class technical bootcamp, where they spend one week on each specialized module, followed by two additional weeks of on-field, real-world experience. This approach ensures graduates are not only technically proficient but also job-ready from day one.\n\nWhat sets us apart:\n\n    • Courses are 100% hands-on and instructor-led\n    • Graduates receive real-world exposure through a two-week internship\n    • Over 50 five-star reviews from satisfied students and employers\n    • 98% of our students are successfully employed after graduation\n    • New training cohorts begin every 6 weeks, ensuring a steady pipeline of trained technicians\n\nWe are currently expanding our placement network and are looking to partner with companies like yours who are seeking reliable, certified, and field-ready technicians in cabling and electronic security.\n\nBy partnering with Delmi Training Institute, you gain:\n\n    • Direct access to our pool of trained and job-ready graduates\n    • A consistent, cost-effective source for new hires\n    • The opportunity to influence and guide future training curriculums\n\n${videoSection}`;
 
