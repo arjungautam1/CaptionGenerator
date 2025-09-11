@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import EmailTemplate from './components/EmailTemplate/EmailTemplate';
+import InternationalStudents from './components/EmailTemplate/InternationalStudents';
 import HomePage from './components/Home/HomePage';
 import GuestVisit from './components/GuestVisit/GuestVisit';
 import CoursePromo from './components/CoursePromo/CoursePromo';
@@ -25,6 +26,8 @@ function App() {
         return <EmailTemplate onBackToMenu={handleBackToMenu} />;
       case 'guest-visit':
         return <GuestVisit onBackToMenu={handleBackToMenu} />;
+      case 'international-students':
+        return <InternationalStudents onBackToMenu={handleBackToMenu} />;
       case 'network-cabling':
       case 'cctv-surveillance':
       case 'electronics-relays':

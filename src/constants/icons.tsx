@@ -67,6 +67,13 @@ export const AccessControlIcon = () => (
   </svg>
 );
 
+// Simple globe icon for International Students
+export const GlobeIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zm9.5 11h-4.051c-.157-3.338-1.53-6.142-3.449-7.44C16.981 4.61 19.137 7.51 19.5 11zM12 2c1.62 0 3.133 1.847 3.91 4.69.34 1.24.548 2.63.6 4.31H7.49c.052-1.68.26-3.07.6-4.31C8.867 3.847 10.38 2 12 2zM4.5 11H.949C1.313 7.51 3.47 4.61 6.05 3.56 4.13 4.858 2.757 7.662 2.6 11H4.5zm-3.551 2H4.5c.157 3.338 1.53 6.142 3.449 7.44C7.019 19.39 4.863 16.49 4.5 13zm7.541 0h8.02c-.052 1.68-.26 3.07-.6 4.31C15.133 20.153 13.62 22 12 22s-3.133-1.847-3.91-4.69c-.34-1.24-.548-2.63-.6-4.31zM19.5 13h1.9c-.163 3.338-2.319 6.238-4.899 7.44 1.919-1.298 3.292-4.102 3.449-7.44z"/>
+  </svg>
+);
+
 // Platform data structure
 export const platformsData = [
   {
@@ -108,6 +115,12 @@ export const categoriesData = [
     name: 'Email Template',
     icon: <EmailIcon />,
     color: '#d4a017'
+  },
+  {
+    id: 'international-students',
+    name: 'International Students',
+    icon: <GlobeIcon />,
+    color: '#2FAE7B'
   },
   {
     id: 'guest-visit',
