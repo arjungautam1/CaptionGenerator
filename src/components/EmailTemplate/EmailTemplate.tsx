@@ -21,11 +21,11 @@ const EmailTemplate: React.FC<EmailTemplateProps> = ({ onBackToMenu }) => {
   const themeColor = '#4E7BB5';
 
   const generateEmailTemplate = () => {
-    const courseList = `✅  Network Cabling – 1 week (Monday to Friday, 9 AM to 5 PM)\n✅  CCTV Surveillance – 1 week (Monday to Friday, 9 AM to 5 PM)\n✅  Electronics and Relays – 3 days (Monday to Wednesday, 9 AM to 5 PM)\n✅  Access Control – 1 week (Monday to Friday, 9 AM to 5 PM)\n\n✅  We also provide a 2-week on-field internship after course completion to give you practical, real-world experience.`;
-    const pricingLine = `\n\nOur courses are normally CAD $1,999 but From time to time we also offer special discounts. You can check our website or call us to get maximum offers.`;
-    const template = `Hi ${recipientName || '[Name]'},\n\nI hope you're doing well.\n\nI'm reaching out to share information about the training programs offered at Delmi Training Institute.\n\n${referralName 
-      ? `As ${referralName} shared your contact with us, we're pleased to extend a special discount exclusively for you.\n\n` 
-      : ''}${courseList}${includePricing ? pricingLine : ''}\n\nYou can explore detailed course information here:\n👉  https://www.delmitraining.com/ourcourses\n\nIf you have any questions or need help with enrollment, feel free to contact us:\n📞  +1 905-783-3564\n\nFor more information, visit our website:\n🌐  https://www.delmitraining.com\n\nFeel free to come and visit us at:\n🏢  7600 Ontario 27 #5a, Vaughan ON L4H 0P8, Canada\n📍  View on Google Maps: https://g.co/kgs/Y6unGMQ\n\nBest regards,\nRoland\nDelmi Training Institute`;
+    const courseList = `✅  Network Cabling – 1 week (Monday to Friday, 9 AM to 5 PM)\n✅  CCTV Surveillance – 1 week (Monday to Friday, 9 AM to 5 PM)\n✅  Electronics and Relays – 4 days (Monday to Thursday, 9 AM to 5 PM)\n✅  Access Control – 1 week (Monday to Friday, 9 AM to 5 PM)`;
+    const internshipLine = `\n\n✅  We also provide a 2-week on-field internship after course completion to give you practical, real-world experience.`;
+    const safetyLine = `\n✅  We also provide safety training: WHMIS (Workplace Hazardous Materials Information System) and Working at Heights.`;
+    const pricingLine = `\n\nOur courses are normally CAD $1,999, but from time to time we also offer special discounts. You can check our website or call us to get the best offer.`;
+    const template = `Hi ${recipientName || '[Name]'},\n\nI hope you're doing well.\n\nI'm reaching out to share information about the training programs offered at Delmi Training Institute.\n\n${courseList}${internshipLine}${safetyLine}${includePricing ? pricingLine : ''}\n\nYou can explore detailed course information here:\n👉  https://www.delmitraining.com/ourcourses\n\n${referralName ? `As ${referralName} shared your contact with us, we're pleased to extend a special discount exclusively for you.\n\n` : ''}If you have any questions or need help with enrollment, feel free to contact us:\n📞  +1 905-783-3564\n\nFor more information, visit our website:\n🌐  https://www.delmitraining.com\n\nFeel free to come and visit us at:\n🏢  7600 Ontario 27 #5a, Vaughan ON L4H 0P8, Canada\n📍  View on Google Maps: https://g.co/kgs/Y6unGMQ\n\nBest regards,\nDelmi Training Institute`;
 
     setEmailTemplate(template);
     
