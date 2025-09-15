@@ -5,7 +5,7 @@ import useWindowSize from '../../hooks/useWindowSize';
 interface EmailTemplateProps {
   onBackToMenu: () => void;
 }
-
+//test
 const EmailTemplate: React.FC<EmailTemplateProps> = ({ onBackToMenu }) => {
   const [emailTemplate, setEmailTemplate] = useState('');
   const [recipientName, setRecipientName] = useState('');
